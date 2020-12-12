@@ -10,3 +10,7 @@ Gets status of twitch streamers (listed line by line in a text file) and display
 ### Todo
 - Add "x is hosting y" support
 - Figure out how to make a GUI then port this to pinephone? would be neat
+
+## youtube.sh
+
+yea this isnt finished yet. is going to be way more complicated than twitch.sh (simular to newpipe?)
