@@ -9,7 +9,9 @@ Gets status of twitch streamers (listed line by line in a text file) and display
 ![](https://raw.githubusercontent.com/j0lol/simplefrontends/main/twitchscreenshot.png)
 
 ### Todo
-- Add "x is hosting y" support
+- ~~Add "x is hosting y" support~~ DONE 
+![](https://raw.githubusercontent.com/j0lol/simplefrontends/main/twitchhosting.png)
+
 - Figure out how to make a GUI then port this to pinephone? would be neat
 
 ## youtube.sh
