@@ -2,6 +2,8 @@
 (Trying to) create simple, CLI frontends for video websites and stuff
 (just dont look at the code, its messy)
 
+## Why?
+Using official websites suck, and third party clients also suck so i made my own
 ## twitch.sh
 
 Gets status of twitch streamers (listed line by line in a text file) and displays them in a simple CLI. Lets you open their stream in MPV quickly.
