@@ -18,3 +18,9 @@ Gets status of twitch streamers (listed line by line in a text file) and display
 ## youtube.sh
 
 yea this isnt started yet. is going to be way more complicated than twitch.sh (simular to newpipe?)
+
+### The plan
+
+- copy newpipe's ideas totally
+- use invidious api [https://github.com/iv-org/documentation/blob/master/API.md](https://github.com/iv-org/documentation/blob/master/API.md)
+- some day set up an account server, who knows maybe even sync with newpipe
