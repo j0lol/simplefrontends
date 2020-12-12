@@ -3,6 +3,7 @@
 #constants (as if bash had them)
 TWITCHURL="https://twitch.tv/"
 RED='\033[0;31m'
+YELLOW='\033[0;33m'
 GREEN='\033[0;32m'
 NC='\033[0m' # No Color
 FOLLOWSDIR="$HOME/.config/"
@@ -23,8 +24,10 @@ docurl () {
     --header 'Origin: https://m.twitch.tv' \
     --header 'User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:83.0) Gecko/20100101 Firefox/83.0' \
     --header 'X-Device-Id: SBCCPwRDjdL4rAQ8KYngLGUu9NECqlM6' \
-    --data '{"query":"query ChannelProfile_Query($login: String!) {\n  channel: user(login: $login) {\n    ...ChannelInfoCard_user\n    ...ChannelProfileVideos_user\n    id\n    login\n    displayName\n    stream {\n      id\n    }\n    hosting {\n      id\n      __typename\n      login\n      stream {\n        id\n        __typename\n      }\n    }\n  }\n}\n\nfragment ChannelInfoCard_user on User {\n  displayName\n  hosting {\n    id\n  }\n  stream {\n    type\n  }\n}\n\nfragment ChannelProfileVideos_user on User {\n  ...FeaturedContentCard_user\n  login\n  displayName\n  stream {\n     game {\n        name\n      }\n    title\n  }\n  hosting {\n    id\n  }\n}\n\nfragment FeaturedContentCard_user on User {\n  displayName\n  \n  hosting {\n    id\n    login\n    displayName\n    stream {\n      game {\n        name\n        id\n      }\n      id\n    }\n  }\n}","variables":{"login":"'"$1"'"},"operationName":"ChannelProfile_Query"}' \
+    --data '{"query":"query ChannelProfile_Query($login: String!) {\n  channel: user(login: $login) {\n    ...ChannelInfoCard_user\n    ...ChannelProfileVideos_user\n    id\n    login\n    displayName\n    stream {\n      id\n    }\n    hosting {\n      id\n      __typename\n      login\n      stream {\n        id\n        __typename\n      }\n    }\n  }\n}\n\nfragment ChannelInfoCard_user on User {\n  displayName\n  hosting {\n    id\n  }\n  stream {\n    type\n  }\n}\n\nfragment ChannelProfileVideos_user on User {\n  ...FeaturedContentCard_user\n  login\n  displayName\n  stream {\n     game {\n        name\n      }\n    title\n  }\n  hosting {\n    id\n  }\n}\n\nfragment FeaturedContentCard_user on User {\n  displayName\n  \n  hosting {\n    id\n    login\n    displayName\n    stream {\n      type\n      title\n      game {\n        name\n        id\n      }\n      id\n    }\n  }\n}","variables":{"login":"'"$1"'"},"operationName":"ChannelProfile_Query"}' \
     | tee /tmp/capture.out> /dev/null 2>&1 
+
+
 
   # Optional anti-ratelimit
   #sleep 0.5
@@ -55,13 +58,27 @@ then
     # If stream type is not null (is live)
     if echo $RESPONSE | jq -e -r '.data.channel.stream.type'> /dev/null 2>&1;
     then
-      # Print message
-      echo -e "$GREEN$line$NC is playing $(echo $RESPONSE | jq -e -r '.data.channel.stream.game.name')";
+
+      if echo $RESPONSE | jq -e -r '.data.channel.stream.game.name'> /dev/null 2>&1; then
+        echo -e "$GREEN$(echo $RESPONSE | jq -r '.data.channel.displayName')$NC is playing $(echo $RESPONSE | jq -e -r '.data.channel.stream.game.name')";
+      else
+        echo -e "$GREEN$(echo $RESPONSE | jq -r '.data.channel.displayName')$NC is live";
+      fi
+
       echo $RESPONSE | jq -r '.data.channel.stream.title';   
 
+    elif echo $RESPONSE | jq -e -r '.data.channel.hosting.id'> /dev/null 2>&1;
+    then
 
+      if echo $RESPONSE | jq -e -r '.data.channel.hosting.stream.game.name'> /dev/null 2>&1; then
+        echo -e "$YELLOW$(echo $RESPONSE | jq -r '.data.channel.displayName')$NC is hosting $(echo $RESPONSE | jq -e -r '.data.channel.hosting.displayName') ($(echo $RESPONSE | jq -e -r '.data.channel.hosting.stream.game.name'))";
+      else
+        echo -e "$YELLOW$(echo $RESPONSE | jq -r '.data.channel.displayName')$NC is hosting $(echo $RESPONSE | jq -e -r '.data.channel.hosting.displayName')";
+      fi
+
+      echo $RESPONSE | jq -r '.data.channel.hosting.stream.title';   
       # If stream type is null (is offline)
-    else echo -e "$RED$line$NC is offline"; fi
+    else echo -e "$RED$(echo $RESPONSE | jq -r '.data.channel.displayName')$NC is offline"; fi
 
     # Extra newline to look nice :)
     echo
