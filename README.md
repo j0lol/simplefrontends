@@ -1,5 +1,6 @@
 # Simple frontends
 (Trying to) create simple, CLI frontends for video websites and stuff
+(just dont look at the code, its messy)
 
 ## twitch.sh
 
