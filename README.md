@@ -10,7 +10,8 @@ Gets status of twitch streamers (listed line by line in a text file) and display
 
 ### Todo
 - ~~Add "x is hosting y" support~~ DONE 
-![](https://raw.githubusercontent.com/j0lol/simplefrontends/main/twitchhosting.png)
+
+![](https://media.discordapp.net/attachments/675257567219548160/787124338066587688/unknown.png)
 
 - Figure out how to make a GUI then port this to pinephone? would be neat
 
