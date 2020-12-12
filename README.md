@@ -37,6 +37,6 @@ Gets "subscribed" channels and lists them, and lets you watch their latest, or o
 - Uses youtube's web api (no oauth)
 - Does not have logins
 - Might not work on your setup!
-
+- a bit of care has been taken to remove the 3000 parameters that track you in youtube requests
 ### Todo
 - Steal more videos from "load more" request
