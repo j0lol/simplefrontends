@@ -2,6 +2,8 @@
 (Trying to) create simple, CLI frontends for video websites and stuff
 (just dont look at the code, its messy)
 
+**DISCLAIMER!!!!** These use twitch's and youtube's web apis, not theyre official dev apis, zero care has been taken to ratelimit requests. I take zero responsibility for you being ratelimited from these websites.
+
 ## Why?
 Using official websites suck, and third party clients also suck so i made my own
 ## twitch.sh
