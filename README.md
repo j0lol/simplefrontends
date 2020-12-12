@@ -13,6 +13,7 @@ Gets status of twitch streamers (listed line by line in a text file) and display
 - Does not use any login!
 - Badly programmed!
 - Opens in your favourite video editor (as long as its mpv!)
+- Might not work on your setup!
 
 ![](https://raw.githubusercontent.com/j0lol/simplefrontends/main/twitchscreenshot.png)
 
@@ -31,6 +32,7 @@ Gets "subscribed" channels and lists them, and lets you watch their latest, or o
 - Lets you browse previous videos
 - Uses youtube's web api (no oauth)
 - Does not have logins
+- Might not work on your setup!
 
 ### Todo
-- Steal more videos from "load more" call
+- Steal more videos from "load more" request
