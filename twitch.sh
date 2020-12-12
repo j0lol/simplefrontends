@@ -9,6 +9,9 @@ NC='\033[0m' # No Color
 FOLLOWSDIR="$HOME/.config/"
 FOLLOWSNAME="twitchfollows"
 
+# array
+ARRAY=()
+
 docurl () {
 
   if [ -z "$1" ] ; then echo "Please enter a value";exit; fi
@@ -45,6 +48,9 @@ then
   do
     
     [[ "$line" =~ ^#.*$ ]] && continue
+
+
+    ARRAY+=("$(echo $RESPONSE | jq -r '.data.channel.displayName')")
 
     # cURL request
     docurl "$line"
@@ -91,8 +97,16 @@ then
   # this part uses the youtube-dl addon in mpv to
   # pull the stream directly. This just feeds it as
   # mpv https://twitch.tv/[USER]
-  echo "Type in a streamer to open MPV, or ^C to exit"
-  read REPLY
+  if ! command -v rlwrap &> /dev/null
+	then
+    echo "Please install rlwrap for tab completion."
+    echo "Type in a streamer to open MPV, or ^C to exit"
+    read REPLY
+else
+	REPLY=$(rlwrap -S 'Type in a streamer to open MPV (press tab for auto-complete): ' -e '' -i -f <(echo "${ARRAY[@]}") -o cat)
+
+fi
+
   echo
 
   # string inty polatio 
