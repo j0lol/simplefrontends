@@ -4,6 +4,8 @@
 
 **DISCLAIMER!!!!** These use twitch's and youtube's web apis, not theyre official dev apis, zero care has been taken to ratelimit requests. I take zero responsibility for you being ratelimited from these websites.
 
+**WARNING** After using these scripts, I appear to have ratelimited myself. The youtube iOS app no longer loads, the website leads to a Something went wrong error. The script is still able to fetch information and play videos. Invidious works too.
+
 ## Why?
 Using official websites suck, and third party clients also suck so i made my own
 ## twitch.sh
